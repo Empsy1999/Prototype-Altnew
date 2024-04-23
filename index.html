@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+     <!-- Link to the CSS file -->
+</head>
+<style>body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Set the background color of the sides to a neutral color */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    font-family: 'Satoshi', sans-serif; /* Use the 'Satoshi' font */
+    /* Removed align-items: center; */
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .container {
+    width: calc(100% - 40px); /* Adjusted the width to create space on the sides */
+    max-width: 400px;
+    height: 100vh;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Added padding to create space between the card and the container edges */
+    margin-top: 20px; /* Add margin to the top to create space below the search box */
+  }
+  
+  /* Media query for mobile devices */
+  @media screen and (max-width: 768px) {
+    .container {
+        width: calc(100% - 20px); /* Adjusted the width to fill the viewport */
+        max-width: none; /* Remove maximum width */
+    }
+  }
+  
+  /* New CSS styles for the shopping UI */
+  
+  
+  
+  .btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .search-box {
+    margin-top: 10px; /* Adjusted to position a little lower */
+    margin-left: 10px; /* Adjusted to position a little to the left */
+    text-align: Center;
+  }
+  
+  #searchInput {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+  }
+  
+  #searchButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #searchButton:hover {
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
+  }
+  
+  /*icon */
+  .icon-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .icon {
+    margin-left: 10px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .icon:hover {
+    color: #0056b3;
+  }
+  
+  .profile-icon {
+    margin-top: 10px; /* Adjusted to position a little lower */
+    margin-left: 10px; /* Adjusted to position a little to the left */
+    width: 50px; /* Adjust the size of the profile icon */
+    margin-right: 5px; /* Adjust the margin between icon and text */
+  }
+  
+  .welcome-text {
+    font-size: 14px; /* Adjust the font size of the welcome text */
+  }
+  
+  /*card*/
+  .card {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Add margin to separate from the slider */
+    overflow-y: auto; /* Add overflow-y property to enable vertical scrolling */
+    max-height: calc(100% - 40px); /* Set maximum height to fit within the card */
+}
+.icon-container {
+    padding: 20px; /* Add padding to the container */
+    background-color: #f0f0f0; /* Add background color */
+    border-radius: 10px; /* Add border radius */
+    margin-top: 20px; /* Add margin to separate from the card */
+}
+
+/* Picture Icons */
+.picture-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Ensure icons wrap to next line if there's not enough space */
+}
+
+.icon {
+    width: 50px;
+    height: auto; /* Change height to auto to accommodate varying image heights */
+    margin: 10px; /* Add more spacing around the icon container */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+.icon img {
+    max-width: 100%; /* Ensure image fits inside the container */
+}
+
+.icon-text {
+    font-size: 12px; /* Adjust text size */
+    margin-top: 10px; /* Add more spacing above the text */
+    margin-bottom: 10px; /* Add more spacing below the text */
+    margin-right: 20px; /* Add space between each text */
+    text-align: center; /* Center-align text */
+    flex-grow: 1; /* Allow text to grow to fill available space */
+}
+
+.page-container {
+    margin-top: 20px; /* Add margin to separate from the container above */
+    overflow-y: auto; /* Add overflow-y property to enable vertical scrolling */
+    height: calc(100vh - 180px); /* Set height to fit viewport minus margin and space for card */
+}
+.box {
+    padding: 20px; /* Add padding to the box */
+    background-color: #f0f0f0; /* Add background color */
+    border-radius: 10px; /* Add border radius */
+    position: relative; /* Position relative for absolute positioning of profile picture circle */
+}
+
+.slider-wrapper {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto; /* Center align the slider */
+}
+
+
+.slider {
+	display: flex;
+	aspect-ratio: 16 / 9;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
+	border-radius: 0.5rem;
+	-ms-overflow-style: none; /* Hide scrollbar IE and Edge */
+	scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.slider::-webkit-scrollbar {
+	display: none;
+}
+
+.slider img {
+            flex: 1 0 100%;
+            scroll-snap-align: start;
+            object-fit: cover;
+            height: 100%; /* Set the fixed height of the images */
+        }
+
+.slider-nav {
+	display: flex;
+	column-gap: 1rem;
+	position: absolute;
+	bottom: 1.25rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
+}
+
+.slider-nav a {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background-color: #fff;
+	opacity: 0.75;
+	transition: opacity ease 250ms;
+}
+
+.slider-nav a:hover {
+	opacity: 1;
+}
+.floating-window {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.floating-window .content {
+    padding: 20px;
+}
+
+.floating-window .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Optional: Add transition effect */
+.floating-window {
+    transition: opacity 0.3s ease;
+}
+
+  </style>
+<body>
+    
+    <div class="wrapper">
+        <div class="container">
+            <!-- Icon and Text Container -->
+            <div class="icon-text-container">
+                <!-- Profile icon -->
+                <a href="#" class="icon"><img src="./Resources Pictures/Profile.png" alt="Profile" class="profile-icon"></a>
+                <!-- Welcome text -->
+                <p class="welcome-text">Hi Jebby, welcome back!</p>
+            </div>
+            <!-- Search Box -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search">
+                <button id="searchButton">Search</button>
+            </div>
+            <div class="page-container">
+                <div class="box">
+                    <section class="container1">
+                        <div class="slider-wrapper">
+                            <div class="slider">
+                                <img id="slide-1" src="./Resources Pictures/Marker1.PNG" alt="3D rendering of an imaginary orange planet in space" />
+                                <img id="slide-2" src="./Resources Pictures/marker2.PNG" alt="3D rendering of an imaginary green planet in space" />
+                                <img id="slide-3" src="./Resources Pictures/marker3.PNG" alt="3D rendering of an imaginary blue planet in space" />
+                            </div>
+                            <div class="slider-nav">
+                                <a href="#slide-1"></a>
+                                <a href="#slide-2"></a>
+                                <a href="#slide-3"></a>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="card">
+                        <h2>Artist Alcohol Marker Starter Set</h2>
+                        <h1>14.99</h1>
+                        <p>Our Artist Markers are alcohol-based, allowing you to beautifully blend colors to any stamped images. Our wide range of stamps is perfect for these markers. You can also easily pair them with our Crisp Dye Inks to take your coloring to the next level! The colors in this set are designed to be as close as possible to our existing ink colors, so you can take the color guessing game out of the way when coloring.  </p>
+                    
+                    <!-- Picture Icons -->
+                    <div class="icon-container">
+                        <div class="picture-icons">
+                            <a href="#" onclick="openWindow('descriptionWindow')">
+                                <img src="./Resources Pictures/Description.png" alt="Icon 1" class="icon">
+                                <p class="icon-text">Description</p>
+                            </a>
+                            <a href="#" onclick="openWindow('classSuppliesWindow')">
+                                <img src="./Resources Pictures/classs.png" alt="Icon 2" class="icon">
+                                <p class="icon-text">Class Supplies</p>
+                            </a>
+                            <a href="#" onclick="openWindow('cartWindow')">
+                                <img src="./Resources Pictures/Cart.png" alt="Icon 3" class="icon">
+                                <p class="icon-text">Add to Cart</p>
+                            </a>
+                            <a href="#" onclick="openWindow('questionWindow')">
+                                <img src="./Resources Pictures/question.png" alt="Icon 4" class="icon">
+                                <p class="icon-text">Ask A Question</p>
+                            </a>
+                            <a href="#" onclick="openWindow('shippingInfoWindow')">
+                                <img src="./Resources Pictures/Ship.png" alt="Icon 5" class="icon">
+                                <p class="icon-text">Shipping Info</p>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating windows -->
+                    <div class="floating-window" id="descriptionWindow">
+                        <div class="content">
+                            <span class="close-btn" onclick="closeWindow('descriptionWindow')">X</span>
+                            <h3>Description</h3>
+                            <p>This is the content for Description window.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-window" id="classSuppliesWindow">
+                        <div class="content">
+                            <span class="close-btn" onclick="closeWindow('classSuppliesWindow')">X</span>
+                            <h3>Class Supplies</h3>
+                            <p>This is the content for Class Supplies window.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-window" id="cartWindow">
+                        <div class="content">
+                            <span class="close-btn" onclick="closeWindow('cartWindow')">X</span>
+                            <h3>Add to Cart</h3>
+                            <p>This is the content for Add to Cart window.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-window" id="questionWindow">
+                        <div class="content">
+                            <span class="close-btn" onclick="closeWindow('questionWindow')">X</span>
+                            <h3>Ask A Question</h3>
+                            <p>This is the content for Ask A Question window.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-window" id="shippingInfoWindow">
+                        <div class="content">
+                            <span class="close-btn" onclick="closeWindow('shippingInfoWindow')">X</span>
+                            <h3>Shipping Info</h3>
+                            <p>This is the content for Shipping Info window.</p>
+                        </div>
+                    </div>
+                    <script>
+                        function openWindow(windowId) {
+    var window = document.getElementById(windowId);
+    window.style.display = "block";
+}
+
+function closeWindow(windowId) {
+    var window = document.getElementById(windowId);
+    window.style.display = "none";
+}
+// JavaScript for toggling floating windows
+function openWindow(windowId) {
+    var window = document.getElementById(windowId);
+    window.style.display = "block";
+}
+
+function closeWindow(windowId) {
+    var window = document.getElementById(windowId);
+    window.style.display = "none";
+}
+
+                    </script>
+                </div>
+                </div>
+            </div>
+            
+            
+       </div>
+       
+       
+    </div>
+    
+    <section>
+        <style>
+            /* Your existing CSS styles */
+            .page-indicator {
+    text-align: center;
+    position: fixed;
+    bottom: 20px; /* Adjusted to place it lower */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+   
+    padding: 10px 0; /* Added padding for better spacing */
+    border-radius: 10px; /* Rounded corners for the background */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.page-number {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #007bff;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: white; /* Background color for the circles */
+    z-index: 1; /* Ensure the circles are above the background */
+}
+            
+            .page-number:hover {
+                background-color: #007bff;
+                color: #fff;
+            }
+    
+            /* Adjustments for mobile view */
+            @media screen and (max-width: 768px) {
+                .container {
+                    width: calc(100% - 20px); /* Adjusted the width to fill the viewport */
+                    max-width: none; /* Remove maximum width */
+                    padding: 10px; /* Adjusted padding for better spacing */
+                }
+    
+                .slider-wrapper {
+                    max-width: calc(100% - 40px); /* Adjusted max-width for the slider wrapper */
+                    margin-top: -10px; /* Adjusted margin to be closer below the search bar */
+                }
+    
+                .slider img {
+                    height: auto; /* Set height to auto for responsive images */
+                }
+    
+                .icon-container {
+                    margin-top: 10px; /* Adjusted margin to separate from the card */
+                }
+            }
+            </style>
+        <div class="page-indicator">
+            <span class="page-number">1</span>
+            <span class="page-number">2</span>
+            <span class="page-number">3</span>
+            <span class="page-number">4</span>
+            <span class="page-number">5</span>
+            <span class="page-number">6</span>
+        </div>
+    </section>
+         
+                
+
+          
+    <script ></script> <!-- Link to the JavaScript file -->
+</body>
+</html>
