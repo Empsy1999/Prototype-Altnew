@@ -16,27 +16,25 @@
     font-family: 'Satoshi', sans-serif; /* Use the 'Satoshi' font */
     /* Removed align-items: center; */
   }
-  
+  header, footer {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
   .wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
+   
     width: 100%;
     height: 100vh;
   }
   
   .container {
-    width: calc(100% - 40px); /* Adjusted the width to create space on the sides */
-    max-width: 400px;
-    height: 100vh;
-    background-color: #ffffff;
-    border: 2px solid #000000;
-    border-radius: 0;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px; /* Added padding to create space between the card and the container edges */
-    margin-top: 20px; /* Add margin to the top to create space below the search box */
-  }
+    max-width: 800px; /* Set a maximum width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding to the container */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
   
   /* Media query for mobile devices */
   @media screen and (max-width: 768px) {
@@ -169,9 +167,9 @@
 }
 
 .page-container {
-    margin-top: 20px; /* Add margin to separate from the container above */
     overflow-y: auto; /* Add overflow-y property to enable vertical scrolling */
-    height: calc(100vh - 180px); /* Set height to fit viewport minus margin and space for card */
+    max-height: calc(100vh - 150px); /* Set maximum height to fit viewport minus header and footer height */
+    padding-bottom: 50px; /* Add padding at the bottom to prevent content from being hidden behind the footer */
 }
 .box {
     padding: 20px; /* Add padding to the box */
@@ -275,6 +273,7 @@
         max-height: 100%; /* Ensure the image fits within the content */
         display: inline-block; /* Ensure proper alignment */
     }
+    
 
   </style>
 <body>
@@ -293,6 +292,137 @@
                 <input type="text" id="searchInput" placeholder="Search">
                 <button id="searchButton">Search</button>
             </div>
+            <section>
+                <h1 class="animate-text">View All <span class="animate-products">148</span> Products...</h1>
+                <div class="card-slider" id="uniqueCardSlider">
+                    
+                    <div class="card-container" id="uniqueCardContainer">
+                        <!-- Add your cards here -->
+                        <!-- Card 1 -->
+                        <div class="unique-card" id="uniqueCard1">
+                            <img src="./Resources Pictures/1.png" alt="Card 1 Image">
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="unique-card" id="uniqueCard2">
+                            <img src="./Resources Pictures/2.png" alt="Card 2 Image">
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="unique-card" id="uniqueCard3">
+                            <img src="./Resources Pictures/3.png" alt="Card 3 Image">
+                        </div>
+                        <!-- Add more cards as needed -->
+                    </div>
+                </div>
+                <style>
+                    /* Unique card slider styles */
+                    #uniqueCardSlider {
+                        overflow-x: auto;
+                        white-space: nowrap;
+                    }
+            
+                    /* Unique card container styles */
+                    #uniqueCardContainer {
+                        display: inline-block;
+                    }
+            
+                    /* Unique card styles */
+                    .unique-card {
+                        width: 150px;
+                        height: 100px;
+                        margin-right: 20px;
+                        background-color: #ffffff;
+                        border-radius: 10px;
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                        display: inline-block;
+                        vertical-align: top;
+                        transition: transform 0.3s ease;
+                        cursor: pointer;
+                    }
+            
+                    .unique-card:hover {
+                        transform: translateY(-5px);
+                    }
+            
+                    .unique-card img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 10px;
+                        object-fit: cover;
+                    }
+            
+                    /* Red border line */
+                    .unique-card {
+                        border-left: 5px solid #d1d401;
+                    }
+            
+                    /* Animation for "148" */
+                    .animate-products {
+                        animation: pulse 1s infinite alternate;
+                    }
+            
+                    @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .animate-text {
+            animation: slideIn 1s forwards;
+            font-family: Arial, sans-serif; /* Change font family */
+            font-size: 24px; /* Change font size */
+            font-weight: bold; /* Change font weight */
+            color: #333; /* Change text color */
+            margin-top: 20px; /* Adjust margin */
+            display: inline-block; /* Required for animation */
+        }
+
+        /* Animation for "148" */
+        .animate-products {
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+                </style>
+                <script>
+                   // JavaScript for card slider functionality
+                    const uniqueSlider = document.getElementById('uniqueCardSlider');
+                    let isDown = false;
+                    let startX;
+                    let scrollLeft;
+            
+                    uniqueSlider.addEventListener('mousedown', (e) => {
+                        isDown = true;
+                        startX = e.pageX - uniqueSlider.offsetLeft;
+                        scrollLeft = uniqueSlider.scrollLeft;
+                    });
+            
+                    uniqueSlider.addEventListener('mouseleave', () => {
+                        isDown = false;
+                    });
+            
+                    uniqueSlider.addEventListener('mouseup', () => {
+                        isDown = false;
+                    });
+            
+                    uniqueSlider.addEventListener('mousemove', (e) => {
+                        if (!isDown) return;
+                        e.preventDefault();
+                        const x = e.pageX - uniqueSlider.offsetLeft;
+                        const walk = (x - startX) * 2; // Adjust scrolling speed
+                        uniqueSlider.scrollLeft = scrollLeft - walk;
+                    });
+                </script>
+            </section>
             <div class="page-container">
                 <div class="box">
                     <section class="container1">
@@ -355,7 +485,7 @@
                     </section>
                     <div class="card">
                         <h2>Artist Alcohol Marker Starter Set</h2>
-                        <h1>14.99</h1>
+                        <h1>$14.99</h1>
                         <p>Our Artist Markers are alcohol-based, allowing you to beautifully blend colors to any stamped images. Our wide range of stamps is perfect for these markers. You can also easily pair them with our Crisp Dye Inks to take your coloring to the next level! The colors in this set are designed to be as close as possible to our existing ink colors, so you can take the color guessing game out of the way when coloring.  </p>
                     
                     <!-- Picture Icons -->
@@ -366,11 +496,11 @@
                                 <p class="icon-text">Description</p>
                             </a>
                             <a href="#" onclick="openWindow('classSuppliesWindow')">
-                                <img src="./Resources Pictures/classs.png" alt="Icon 2" class="icon">
+                                <img src="./Resources Pictures/Class.png" alt="Icon 2" class="icon">
                                 <p class="icon-text">Class Supplies</p>
                             </a>
                             <a href="#" onclick="openWindow('cartWindow')">
-                                <img src="./Resources Pictures/Cart.png" alt="Icon 3" class="icon">
+                                <img src="./Resources Pictures/Add to cart.png" alt="Icon 3" class="icon">
                                 <p class="icon-text">Add to Cart</p>
                             </a>
                             <a href="#" onclick="openWindow('questionWindow')">
